@@ -21,3 +21,5 @@ User actions are saved into MongoDB. You can access database tables with the inf
 All code is placed inside Github repository - https://github.com/TomasSinkevicius/ibm-task/tree/master/ibm-task
 
 .env files are public.
+
+Author - Tomas Sinkevicius
