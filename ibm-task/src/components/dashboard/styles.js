@@ -15,4 +15,8 @@ export const Wrapper = styled.div`
   h1 {
     text-align: center;
   }
+
+  .alert {
+    margin-top: 16px;
+  }
 `

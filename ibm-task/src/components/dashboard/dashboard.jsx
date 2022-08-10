@@ -84,7 +84,7 @@ export const Dashboard = () => {
         )}
 
         {count === 0 ? (
-          <p>No companies found</p>
+          <p className='alert alert-primary'>No companies found</p>
         ) : (
           <CompanyProfiles
             companyProfileValues={companyProfileValues}
