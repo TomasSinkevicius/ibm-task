@@ -49,7 +49,6 @@ export const CompanyProfiles = ({
   }
 
   const sendClientData = async (companyName, responseCandles) => {
-    console.log('SENDING CLIENT DATA')
     const SERVER_API = `${process.env.REACT_APP_SERVER_API}/action`
     const body = {
       companyName: companyName,
@@ -61,7 +60,7 @@ export const CompanyProfiles = ({
     axios
       .post(SERVER_API, body)
       .then(response => {
-        console.log('SIUNCIAM DATA', response.data)
+        console.log(response.data)
       })
       .catch(err => console.log(err))
   }
@@ -89,8 +88,8 @@ export const CompanyProfiles = ({
           />
           {companyProfileValues.length < count && (
             <button
+              className='btn btn-primary'
               onClick={() => {
-                console.log('ilgis', companyProfileValues.length)
                 getCompanyProfiles(
                   symbols,
                   companyProfileValues.length + 1,

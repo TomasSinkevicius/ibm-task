@@ -11,9 +11,6 @@ export const FormContainer = styled.form`
   }
   input {
     margin-bottom: 8px;
-    border: 1px solid black;
-    color: black;
-    padding: 4px;
     cursor: pointer;
   }
 

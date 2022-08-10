@@ -16,16 +16,29 @@ export const Form = ({ onFormSubmit, setSearchValue, errors }) => {
 
   return (
     <Styled.FormContainer onSubmit={onFormSubmit}>
+      {errors.name && <p className='alert alert-danger'>{errors.name}</p>}
       <label>Company name:</label>
-      <input placeholder='Company name' name='name' onChange={handleOnChange} />
-      <p>{errors.name}</p>
+      <input
+        className='form-control'
+        placeholder='Company name'
+        name='name'
+        onChange={handleOnChange}
+      />
+      {errors.dateFrom && <p>{errors.dateFrom}</p>}
       <label>Date from:</label>
-      <input type='date' placeholder='Date from' name='dateFrom' onChange={handleOnChange} />
-      <p>{errors.dateFrom}</p>
+      <input
+        className='form-control'
+        type='date'
+        placeholder='Date from'
+        name='dateFrom'
+        onChange={handleOnChange}
+      />
+      {errors.dateTo && <p>{errors.dateTo}</p>}
       <label>Date to:</label>
-      <input type='date' name='dateTo' onChange={handleOnChange} />
-      <p>{errors.dateTo}</p>
-      <button>Search</button>
+      <input className='form-control' type='date' name='dateTo' onChange={handleOnChange} />
+      <button className='btn btn-primary' type='submit'>
+        Search
+      </button>
     </Styled.FormContainer>
   )
 }

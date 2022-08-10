@@ -2,16 +2,17 @@ import styled from 'styled-components'
 
 export const TilesContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
 
   .single-tile {
     display: flex;
     flex-direction: column;
-    margin-bottom: 8px;
-    border: 1px solid black;
-    padding: 4px;
-    width: 200px;
+    margin-bottom: 24px;
+    border: 1px solid #ced4da;
+    padding: 8px;
+    width: 250px;
+    border-radius: 6px;
 
     p {
       color: black;
@@ -28,26 +29,27 @@ export const TilesContainer = styled.div`
       text-align: left;
       cursor: pointer;
 
-      p {
-        text-decoration: underline;
-        color: blue;
+      strong {
+        color: #0d6efd;
+        font-size: 18px;
+
+        :hover {
+          color: #0b5ed7;
+          transition: transform color ease-in-out 0.1s;
+        }
       }
     }
   }
 
-  @media screen and (max-width: 1300px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1070px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: 850px) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 555px) {
     grid-template-columns: 1fr;
 
     .single-tile {

@@ -37,8 +37,6 @@ export const Dashboard = () => {
   }
 
   const getCompanyProfiles = async (sym, from, to, reset = false) => {
-    console.log(sym)
-
     try {
       let companyProfiles = await Promise.all(
         sym

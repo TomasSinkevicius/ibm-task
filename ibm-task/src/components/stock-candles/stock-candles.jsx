@@ -9,7 +9,9 @@ export const StockCandles = ({ setIndex, stockCandles, INTERVAL_OPTIONS, setInte
   return (
     <Styled.StockCandlesContainer>
       <Styled.TopSection>
-        <button onClick={() => setIndex(0)}>Back to list</button>
+        <button className='btn btn-primary' onClick={() => setIndex(0)}>
+          Back to the list
+        </button>
         <span>Resolution : </span>
 
         <select onChange={handleChangeInterval}>

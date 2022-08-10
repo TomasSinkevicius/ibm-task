@@ -23,11 +23,18 @@ export const CompanyProfileTiles = ({
           companyProfile.name && (
             <div key={`${index} ${companyProfile.name}`} className='single-tile'>
               <button onClick={() => handleClick(companyProfile.ticker, companyProfile.name)}>
-                <p>name : {companyProfile.name}</p>
+                <strong>name : {companyProfile.name}</strong>
               </button>
-              <p>country : {companyProfile.country}</p>
-              <p>currency : {companyProfile.currency}</p>
-              <p>web url : {companyProfile.weburl}</p>
+              <p>
+                <strong>country :</strong> {companyProfile.country}
+              </p>
+              <p>
+                <strong>currency :</strong> {companyProfile.currency}
+              </p>
+              <p>
+                <strong>web url : </strong>
+                {companyProfile.weburl}
+              </p>
             </div>
           ),
       )}
