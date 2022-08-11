@@ -3,11 +3,17 @@ import { StockCandlesDiagram } from './stock-candles-diagram/stock-candles-diagr
 
 import * as Styled from './styles'
 
-export const StockCandles = ({ setIndex, stockCandles, INTERVAL_OPTIONS, setInterval }) => {
+export const StockCandles = ({
+  setIndex,
+  stockCandles,
+  INTERVAL_OPTIONS,
+  setInterval,
+  selectedCompany,
+}) => {
   const handleChangeInterval = event => setInterval(event.target.value)
-
   return (
     <Styled.StockCandlesContainer>
+      <h3>{selectedCompany.name}</h3>
       <Styled.TopSection>
         <button className='btn btn-primary' onClick={() => setIndex(0)}>
           Back to the list

@@ -19,6 +19,7 @@ export const CompanyProfiles = ({
 
   const INTERVAL_OPTIONS = [1, 5, 15, 30, 60, 'D', 'W', 'M']
   const [interval, setInterval] = useState(INTERVAL_OPTIONS[0])
+  const [selectedCompany, setSelectedCompany] = useState({ symbol: '', name: '' })
 
   const getStockCandles = async selectedCompany => {
     return new Promise((resolve, reject) => {
@@ -33,16 +34,17 @@ export const CompanyProfiles = ({
     })
   }
 
-  const handleStockCandles = async (selectedCompany, companyName) => {
+  const handleStockCandles = async (symbol, companyName) => {
     try {
-      const responseCandles = await getStockCandles(selectedCompany)
+      const responseCandles = await getStockCandles(symbol)
       setStockCandles(responseCandles)
+      setSelectedCompany({ symbol: symbol, name: companyName })
       setIndex(1)
       sendClientData(companyName, responseCandles)
     } catch (error) {
       console.log(error)
       if (error.response.status === 403) {
-        sendClientData(selectedCompany, 'NO-ACCESS')
+        sendClientData(companyName, 'NO-ACCESS')
         alert('no access')
       }
     }
@@ -59,14 +61,12 @@ export const CompanyProfiles = ({
 
     axios
       .post(SERVER_API, body)
-      .then(response => {
-        console.log(response.data)
-      })
+      .then(response => response.data)
       .catch(err => console.log(err))
   }
 
   useEffect(() => {
-    handleStockCandles()
+    selectedCompany.symbol && handleStockCandles(selectedCompany.symbol, selectedCompany.name)
   }, [interval])
 
   return (
@@ -77,6 +77,7 @@ export const CompanyProfiles = ({
           stockCandles={stockCandles}
           setInterval={setInterval}
           INTERVAL_OPTIONS={INTERVAL_OPTIONS}
+          selectedCompany={selectedCompany}
         />
       ) : (
         <>
