@@ -19,4 +19,8 @@ export const Wrapper = styled.div`
   .alert {
     margin-top: 16px;
   }
+
+  .spinner {
+    margin: 16px 0;
+  }
 `

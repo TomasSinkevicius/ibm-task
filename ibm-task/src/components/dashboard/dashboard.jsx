@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Form } from '../form/form'
 import { CompanyProfiles } from '../company-profiles/company-profiles'
 import { validateCompanyName } from '../../validator/company-profiles'
+import SpinnerGif from '../../assets/spinner.gif'
 
 const initialState = {
   name: '',
@@ -18,12 +19,15 @@ export const Dashboard = () => {
   const [companyProfileValues, setCompanyProfileValues] = useState([])
   const [errors, setErrors] = useState('')
   const [index, setIndex] = useState(0)
+  const [loading, setLoading] = useState(false)
 
-  const onFormSubmit = async e => {
+  const onFormSubmit = async (e) => {
     e.preventDefault()
     const formErrors = validateCompanyName(searchValue, setErrors)
 
     if (Object.keys(formErrors).length === 0) {
+      setLoading(true)
+
       try {
         const responseSymbols = await getSymbols()
         setSymbols(responseSymbols.result)
@@ -37,30 +41,32 @@ export const Dashboard = () => {
   }
 
   const getCompanyProfiles = async (sym, from, to, reset = false) => {
+    setLoading(true)
+
     try {
       let companyProfiles = await Promise.all(
         sym
           .slice(from - 1, sym.length > to ? to : sym.length)
-          .map(async element => await getSingleCompanyProfile(element.symbol)),
+          .map(async (element) => await getSingleCompanyProfile(element.symbol)),
       )
-
       reset
         ? setCompanyProfileValues(companyProfiles)
         : setCompanyProfileValues([...companyProfileValues, ...companyProfiles])
     } catch (error) {
       console.log(error)
     }
+    setLoading(false)
   }
 
-  const getSingleCompanyProfile = companySymbol => {
+  const getSingleCompanyProfile = (companySymbol) => {
     const FINNHUB_COMPANY_PROFILE_API = `${process.env.REACT_APP_FINNHUB_COMPANY_PROFILE_API}?symbol=${companySymbol}&token=${process.env.REACT_APP_FINNHUB_TOKEN}`
 
     return axios
       .get(FINNHUB_COMPANY_PROFILE_API)
-      .then(response => {
+      .then((response) => {
         return response.data
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
       })
   }
@@ -70,8 +76,13 @@ export const Dashboard = () => {
 
     return axios
       .get(FINNHUB_COMPANY_SYMBOLS_API)
-      .then(response => response.data)
-      .catch(err => console.log(err))
+      .then((response) => response.data)
+      .catch((err) => {
+        if (err.response.status === 429) {
+          alert('the user has sent too many requests in a given amount of time ')
+        }
+        console.log(err)
+      })
   }
 
   return (
@@ -82,6 +93,8 @@ export const Dashboard = () => {
         {index === 0 && (
           <Form onFormSubmit={onFormSubmit} setSearchValue={setSearchValue} errors={errors} />
         )}
+
+        {loading && <img className='spinner' src={SpinnerGif} alt='loading' />}
 
         {count === 0 ? (
           <p className='alert alert-primary'>No companies found</p>

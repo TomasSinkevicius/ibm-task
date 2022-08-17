@@ -20,7 +20,7 @@ export const CompanyProfileTiles = ({
     <Styled.TilesContainer>
       {companyProfileValues?.map(
         (companyProfile, index) =>
-          companyProfile.name && (
+          companyProfile?.name && (
             <div key={`${index} ${companyProfile.name}`} className='single-tile'>
               <button onClick={() => handleClick(companyProfile.ticker, companyProfile.name)}>
                 <strong>name : {companyProfile.name}</strong>

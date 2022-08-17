@@ -21,16 +21,16 @@ export const CompanyProfiles = ({
   const [interval, setInterval] = useState(INTERVAL_OPTIONS[0])
   const [selectedCompany, setSelectedCompany] = useState({ symbol: '', name: '' })
 
-  const getStockCandles = async selectedCompany => {
+  const getStockCandles = async (selectedCompany) => {
     return new Promise((resolve, reject) => {
       const FINNGUB_STOCK_CANDLES_API = `${process.env.REACT_APP_FINNHUB_STOCK_CANDLES_API}?symbol=${selectedCompany}&resolution=${interval}&from=${searchValue.dateFrom}&to=${searchValue.dateTo}&token=${process.env.REACT_APP_FINNHUB_TOKEN}`
 
       axios
         .get(FINNGUB_STOCK_CANDLES_API)
-        .then(response => {
+        .then((response) => {
           resolve(response.data)
         })
-        .catch(err => reject(err))
+        .catch((err) => reject(err))
     })
   }
 
@@ -61,8 +61,8 @@ export const CompanyProfiles = ({
 
     axios
       .post(SERVER_API, body)
-      .then(response => response.data)
-      .catch(err => console.log(err))
+      .then((response) => response.data)
+      .catch((err) => console.log(err))
   }
 
   useEffect(() => {
